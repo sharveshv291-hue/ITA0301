@@ -1,0 +1,34 @@
+import random
+
+# Base station names
+BS1 = "Base Station 1"
+BS2 = "Base Station 2"
+
+serving = BS1
+hysteresis = 5
+
+print("Handoff Simulation\n")
+
+for i in range(1, 16):
+    # Generate signal strength values
+    signal1 = random.randint(30, 80)
+    signal2 = random.randint(30, 80)
+
+    print("\nStep:", i)
+    print("BS1 Signal:", signal1)
+    print("BS2 Signal:", signal2)
+
+    # Handoff decision using hysteresis
+    if serving == BS1:
+        if signal2 > signal1 + hysteresis:
+            serving = BS2
+            print("Handoff: BS1 -> BS2")
+
+    else:
+        if signal1 > signal2 + hysteresis:
+            serving = BS1
+            print("Handoff: BS2 -> BS1")
+
+    print("Serving Base Station:", serving)
+
+print("\nSimulation Completed")
